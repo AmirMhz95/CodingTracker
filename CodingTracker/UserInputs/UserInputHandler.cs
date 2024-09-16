@@ -22,11 +22,16 @@ namespace UserInputs
 
         public UserInput GetUserInput()
         {
+            var startTime = _startTimeInputHandler.GetInput();
+            var endTime = _endTimeInputHandler.GetInput();
+            var duration = (int)(endTime - startTime).TotalSeconds;
+
             return new UserInput
             {
                 Date = _dateInputHandler.GetInput().ToString("yyyy-MM-dd"),
-                StartTime = _startTimeInputHandler.GetInput().ToString(@"hh\:mm\:ss"),
-                EndTime = _endTimeInputHandler.GetInput().ToString(@"hh\:mm\:ss")
+                StartTime = startTime.ToString(@"hh\:mm\:ss"),
+                EndTime = endTime.ToString(@"hh\:mm\:ss"),
+                Duration = duration
             };
         }
     }

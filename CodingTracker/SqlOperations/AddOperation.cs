@@ -31,15 +31,17 @@ namespace SqlOperations
                 connection.Open();
 
                 string insertQuery = @"
-                    INSERT INTO CodingTracker (Date, StartTime, EndTime) 
-                    VALUES (@Date, @StartTime, @EndTime);
+                    INSERT INTO CodingTracker (Date, StartTime, EndTime, Duration) 
+                    VALUES (@Date, @StartTime, @EndTime, @Duration);
                 ";
 
                 var parameters = new
                 {
                     Date = userInput.Date,
                     StartTime = userInput.StartTime,
-                    EndTime = userInput.EndTime
+                    EndTime = userInput.EndTime,
+                    Duration = userInput.Duration
+
                 };
 
                 connection.Execute(insertQuery, parameters);

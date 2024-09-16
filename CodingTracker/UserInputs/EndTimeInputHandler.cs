@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UserInputs;
 
-namespace CodingTracker.UserInputs
+namespace UserInputs
 {
     public class EndTimeInputHandler : IInputHandler<TimeSpan>
     {
