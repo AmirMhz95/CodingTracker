@@ -25,6 +25,8 @@ public class Program
 
             try
             {
+                ISqliteOperations operation = null;
+
                 switch (choice)
                 {
                     case "1":
@@ -33,14 +35,37 @@ public class Program
                         IInputHandler<TimeSpan> endTimeInputHandler = new EndTimeInputHandler();
 
 
-                        AddOperation addOperation = new AddOperation(connectionString, new UserInputHandler(dateInputHandler, startTimeInputHandler, endTimeInputHandler));
-                        addOperation.Execute();
+                        operation = new AddOperation(connectionString, new UserInputHandler(dateInputHandler, startTimeInputHandler, endTimeInputHandler));
+                        operation.Execute();
                         ConsoleMessages.ShowSuccessMessage("Entry added successfully");
                         break;
+
+                    case "2":
+
+                        operation = new ReadOperation(connectionString);
+                        operation.Execute();
+                        break;
+
+                    case "3":
+
+                        IInputHandler<DateTime> dateInputHandlerForUpdate = new DateInputHandler();
+                        IInputHandler<TimeSpan> startTimeInputHandlerForUpdate = new StartTimeInputHandler();
+                        IInputHandler<TimeSpan> endTimeInputHandlerForUpdate = new EndTimeInputHandler();
+
+                        operation = new UpdateOperation(connectionString, new UserInputHandler(dateInputHandlerForUpdate, startTimeInputHandlerForUpdate, endTimeInputHandlerForUpdate));
+                        operation.Execute();
+                        break;
+
+                    case "4":
+                        operation = new DeleteOperation(connectionString);
+                        operation.Execute();
+                        break;
+
                     case "5":
                         ConsoleMessages.ShowExitMessage("Exiting the application");
                         exit = true;
                         break;
+
                     default:
                         throw new InvalidOperationException("Invalid choice. Please select a valid option.");
                 }
